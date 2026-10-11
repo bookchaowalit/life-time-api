@@ -1,0 +1,46 @@
+# Time tracking cell: an empty cell made from the retired SQLite tables (time_entries, time_logs).
+# The domain had no rows when it left the control plane (2026-10-11); new features are built here.
+cell: time
+title: Time tracking
+resources:
+  time-entry:
+    table: time_entries
+    plural: time-entries
+    filters:
+    - task_id
+    fields:
+      task_id:
+        type: bigint
+        required: true
+      started_at:
+        type: timestamp
+        required: true
+      ended_at:
+        type: timestamp
+      duration_seconds:
+        type: int
+      source:
+        type: text
+        default: manual
+      notes:
+        type: text
+  time-log:
+    table: time_logs
+    plural: time-logs
+    filters: []
+    fields:
+      log_date:
+        type: text
+        required: true
+      domain:
+        type: text
+        required: true
+      activity:
+        type: text
+        required: true
+      minutes:
+        type: int
+        default: 0
+      notes:
+        type: text
+
