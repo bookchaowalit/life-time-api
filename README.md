@@ -1,4 +1,4 @@
-# solo-time
+# time-tracking
 
 The Time tracking cell: its own API (Railway, serverless) and its own Neon
 database, described by `cell.yaml` and served by the code in `src/cellkit/`, which
