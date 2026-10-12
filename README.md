@@ -8,8 +8,8 @@ HTTP with the caller's token.
 
 | | |
 |---|---|
-| API | Railway project `solo-time`, service `time-api` (Serverless) |
-| Data | Neon project `solo-time`, database `time` |
+| API | Railway project `time-tracking`, service `time-api` (Serverless) |
+| Data | Neon project `time-tracking`, database `time` |
 | Registry | solo-empire `repository-catalog/registries/online-systems.yaml` (`time`) |
 
 ## API
