@@ -1,5 +1,4 @@
-# time-tracking
-
+# life-time-api
 The Time tracking cell: its own API (Railway, serverless) and its own Neon
 database, described by `cell.yaml` and served by the code in `src/cellkit/`, which
 this repository owns. It
@@ -8,8 +7,8 @@ HTTP with the caller's token.
 
 | | |
 |---|---|
-| API | Railway project `time-tracking`, service `time-api` (Serverless) |
-| Data | Neon project `time-tracking`, database `time` |
+| API | Railway project `life-time-api`, service `time-api` (Serverless) |
+| Data | Neon project `life-time-api`, database `time` |
 | Registry | solo-empire `repository-catalog/registries/online-systems.yaml` (`time`) |
 
 ## API
