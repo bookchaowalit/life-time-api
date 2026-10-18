@@ -36,5 +36,6 @@ Railway's Wait for CI (`checkSuites`). A merge to `main` deploys only after the 
 checks pass; a failing check leaves production on the previous deployment. Roll back by
 redeploying an earlier deployment in Railway. `railway up` is no longer used.
 
-Railway variables: `TIME_DB_MODE=hosted`, `TIME_DB_URL_API`,
+Railway variables: `SENTRY_DSN` (error reporting; unset = off, see
+`src/cellkit/_sentry.py`), `TIME_DB_MODE=hosted`, `TIME_DB_URL_API`,
 `TIME_JWT_PUBLIC_KEY_PEM`, `TIME_JWT_ISSUER`, `EMPIRE_PLATFORM_URL`.
