@@ -8,6 +8,8 @@ resources:
     plural: time-entries
     filters:
     - task_id
+    ranges:
+    - [started_at, ended_at]
     fields:
       task_id:
         type: bigint
