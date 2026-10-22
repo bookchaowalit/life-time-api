@@ -82,6 +82,13 @@ Big Loop Plan Wave 2 (solo-empire `repository-catalog/roadmaps/BIG-LOOP-PLAN-202
 - **Then** the API answers 422; a valid log defaults `minutes` to 0
 - **Test:** `tests/test_time_log_validation.py::test_required_text_cannot_be_empty` · level: integration (API + throwaway PostgreSQL)
 
+### AC-08 — Numbers fit their columns
+
+- **Given** an int field (PostgreSQL integer) or a real field
+- **When** a client sends 2**31, or NaN / Infinity / 1e400 as raw JSON
+- **Then** the API answers 422 naming the field (before: a 500 from PostgreSQL, or the value silently stored as null)
+- **Test:** `tests/test_contract.py::test_numbers_fit_their_columns` · level: integration (API + throwaway PostgreSQL)
+
 ## 4. Interfaces and data
 
 | Interface | Change | Contract |
@@ -124,6 +131,7 @@ Big Loop Plan Wave 2 (solo-empire `repository-catalog/roadmaps/BIG-LOOP-PLAN-202
 | AC-05 | `tests/test_time_entry_defaults.py::test_an_import_keeps_the_old_id_and_refuses_a_second_import` | characterization (behaviour already present; passed on first run) | CI run of the pushed tip | none |
 | AC-06 | `tests/test_time_entry_queries.py` | characterization (behaviour already present; passed on first run) | CI run of the pushed tip | none |
 | AC-07 | `tests/test_time_log_validation.py::test_required_text_cannot_be_empty` | characterization (behaviour already present; passed on first run) | CI run of the pushed tip | none |
+| AC-08 | `tests/test_contract.py::test_numbers_fit_their_columns` | ef75d70 · `.venv/bin/pytest -q -k numbers_fit` · `psycopg.errors.NumericValueOutOfRange: integer out of range` | CI run of the pushed tip | none |
 
 ## 7. Risks and open questions
 
