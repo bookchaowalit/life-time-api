@@ -30,6 +30,14 @@ resources:
     table: time_logs
     plural: time-logs
     filters: []
+    # platform-empire SPEC-002: time logs reach the graph, and their domain becomes an in-domain set event.
+    # The check-in worker writes work, learning and personal; anything else falls back to unclassified.
+    graph: [domain, log_date, minutes]
+    catalog:
+      in-domain:
+        field: domain
+        map: {work: work, learning: skills, personal: unclassified}
+        default: unclassified
     fields:
       log_date:
         type: text

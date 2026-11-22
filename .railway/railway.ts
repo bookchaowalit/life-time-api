@@ -20,9 +20,18 @@ export default defineRailway(() => {
     healthcheckTimeout: 60,
     deploy: { sleepApplication: true },
   });
+  // platform-empire SPEC-002: time-publisher is a cron sweep of the outbox that exits after each run; it
+  // re-sends rows whose inline publish (time-api) failed. Both services need TIME_PUBLISHER_TOKEN (the
+  // time-publisher automation; token-rotate renews both) and EMPIRE_PLATFORM_URL; the sweep also needs
+  // TIME_DB_MODE=hosted and TIME_DB_URL_PUBLISHER (the time_publisher role, not the API's URL).
+  const publisher = service("time-publisher", {
+    source: github,
+    startCommand: "time-publish",
+    deploy: { cronSchedule: "10 * * * *", restartPolicyType: "NEVER" },
+  });
 
   return project("life-time-api", {
     variables: { managed: false },
-    resources: [api],
+    resources: [api, publisher],
   });
 });
