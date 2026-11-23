@@ -27,7 +27,8 @@ def test_check_in_domains_map_and_lifecycle_events_flow(client, owner, harness):
     assert by_type["time.time-log.linked"]["targets"] == [
         "empire:platform:domain:skills"
     ]
-    assert by_type["time.time-log.created"]["domain"] == "learning"
+    # the lifecycle payload carries no raw values: the outbox outlives a deleted log
+    assert by_type["time.time-log.created"] == {"version": 1, "deleted": False}
 
 
 def test_unknown_domain_falls_back_to_unclassified(harness):

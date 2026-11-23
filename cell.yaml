@@ -30,9 +30,10 @@ resources:
     table: time_logs
     plural: time-logs
     filters: []
-    # platform-empire SPEC-002: time logs reach the graph, and their domain becomes an in-domain set event.
+    # platform-empire SPEC-002: time logs reach the graph as bare nodes (graph: [] keeps domain, date and
+    # minutes out of the retained outbox payload), and their domain becomes an in-domain set event.
     # The check-in worker writes work, learning and personal; anything else falls back to unclassified.
-    graph: [domain, log_date, minutes]
+    graph: []
     catalog:
       in-domain:
         field: domain
