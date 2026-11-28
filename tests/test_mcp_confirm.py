@@ -17,6 +17,14 @@ from mcp.client import Client
 from mcp.types import ElicitResult
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+@pytest.fixture(autouse=True)
+def ask_mode(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Pin the default mode, so a caller's EMPIRE_MCP_CONFIRM cannot change the outcome."""
+    monkeypatch.setenv("EMPIRE_MCP_CONFIRM", "ask")
+
+
 Callback = Any  # an mcp ElicitationFnT, or None for a client without forms
 
 
@@ -78,10 +86,7 @@ def test_no_sends_nothing(callback: Callback) -> None:
     assert "cancelled: not confirmed" in text
 
 
-def test_client_without_forms_keeps_old_behaviour(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    monkeypatch.delenv("EMPIRE_MCP_CONFIRM", raising=False)
+def test_client_without_forms_keeps_old_behaviour() -> None:
     _, hits = run_delete(None)
     assert [m for m, _ in hits] == ["DELETE"]
 
